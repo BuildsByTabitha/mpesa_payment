@@ -1,35 +1,32 @@
 import requests
 from requests.auth import HTTPBasicAuth
-import config # This imports the config.py file you just made!
+import config
 
 def get_access_token():
-    print("Asking Safaricom for the VIP Access Token...")
+    print("Asking Safaricom for Access Token...")
     
-    # This is the exact door Safaricom tells us to knock on for a token
     api_url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
     
-    # We use the 'requests' delivery guy to go to the URL.
-    # Safaricom requires us to present our ID and Password using "Basic Authentication"
-    response = requests.get(
-        api_url,
-        auth=HTTPBasicAuth(config.MPESA_CONSUMER_KEY, config.MPESA_CONSUMER_SECRET)
-    )
-    
-    # Sometimes if keys are completely fake, Safaricom sends back an error webpage or raw text instead of JSON.
-    # We use a 'try/except' block so Python doesn't crash if that happens.
     try:
-        # Try to take the receipt Safaricom hands back and translate it using JSON
+        response = requests.get(
+            api_url,
+            auth=HTTPBasicAuth(config.MPESA_CONSUMER_KEY, config.MPESA_CONSUMER_SECRET)
+        )
+        
         safaricom_reply = response.json()
         
-        print("\n--- SAFARICOM'S REPLY (JSON) ---")
-        print(safaricom_reply)
+        # HERE IS THE FIX: We reach into the dictionary and pull out ONLY the token string!
+        my_access_token = safaricom_reply["access_token"]
         
-    except requests.exceptions.JSONDecodeError:
-        # If it fails to translate to JSON, we catch the error and print the raw text instead
-        print("\n--- SAFARICOM'S REPLY (RAW TEXT/ERROR) ---")
-        print(f"Status Code: {response.status_code}")
-        print("Safaricom didn't return JSON. Here is exactly what they said:")
-        print(response.text)
+        print("\n✅ Access Token successfully extracted!")
+        print(f"My VIP Wristband is: {my_access_token}") # This should print ONLY the letters now!The rest is not issually needed
+        
+        # Return ONLY the token string
+        return my_access_token
+        
+    except Exception as e:
+        print(f"❌ Failed to get token. Error: {e}")
+        return None
 
-# Run the recipe!
-get_access_token()
+# We run the function and save the returned token into a variable
+token = get_access_token()
