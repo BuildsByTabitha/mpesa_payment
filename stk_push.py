@@ -44,7 +44,7 @@ def trigger_stk_push(phone_number, amount):
         "PartyA": phone_number,          # The person paying
         "PartyB": business_shortcode,    # The business receiving
         "PhoneNumber": phone_number,
-        "CallBackURL": "https://mydomain.com/path", # Where Safaricom sends the final receipt (dummy for now)
+        "CallBackURL": "https://webhook.site/62a471a6-604b-4788-b9b9-cca74e8e41c9", # Reception hosted in a server where final receipt is sent
         "AccountReference": "BuildsByTabitha",
         "TransactionDesc": "Payment for coding lessons"
     }
@@ -62,7 +62,7 @@ def trigger_stk_push(phone_number, amount):
         print(response.text)
 # --- RUN THE RECIPE ---
 # ACTUAL Safaricom phone number (Format: 2547... or 2541...)
-my_number = "254701545232" 
+my_number = "254107675856" 
 
 # Asking the customer for 1 Ksh
 trigger_stk_push(my_number, 5)
