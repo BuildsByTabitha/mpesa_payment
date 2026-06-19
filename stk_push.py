@@ -28,12 +28,12 @@ def trigger_stk_push(phone_number, amount):
     # 5. The door we are knocking on for the STK Push
     api_url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
 
-    # 6. The Header (Showing our VIP Wristband)
+    # 6. The Header (Showing our VIP Wristband and our Fake Mustache!-prevent the firewall frm denying us access )
     headers = {
         "Authorization": f"Bearer {access_token}",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" # The Fake Mustache
     }
-
     # 7. The Dictionary (The exact package Safaricom demands)
     payload = {
         "BusinessShortCode": business_shortcode,
