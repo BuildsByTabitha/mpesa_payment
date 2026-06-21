@@ -1,12 +1,14 @@
-from flask import Flask, request, jsonify
-
+from flask import Flask,request, jsonify
+import datetime
 # 1. Create the Flask App (The Reception Desk)
 app = Flask(__name__)
 
 # 2. Create the specific door Safaricom will knock on
 @app.route('/callback', methods=['POST'])
 def mpesa_callback():
-    print("\n📩 --- INCOMING MESSAGE FROM SAFARICOM --- 📩")
+    # Get the exact time the receipt arrived
+    receipt_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(f"\n📩 --- INCOMING MESSAGE FROM SAFARICOM AT {receipt_time} --- 📩")
     
     # Grab the JSON data Safaricom just dropped off
     safaricom_receipt = request.json
