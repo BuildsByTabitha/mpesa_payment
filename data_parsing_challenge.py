@@ -16,10 +16,6 @@ print("--- DAILY SALES REPORT ---")
 # Let's print the vendor name to start:
 print(f"Store: {daily_report['Vendor']}\n")
 
-# ==========================================
-# YOUR CHALLENGE: Fill in the missing pieces!
-# ==========================================
-
 # CHALLENGE 1: Extract the Amount of the FIRST transaction (Should be 500)
 # Hint: Drill down into "Transactions", grab the first item [0], then the "Amount"
 first_amount = daily_report["Transactions"][0]["Amount"]
