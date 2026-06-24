@@ -24,8 +24,6 @@ def package_mpesa_request(customer_phone, payment_amount):
     print("--- READY FOR THE INTERNET ---")
     print(safaricom_json)
 
-
-# --- NOW WE USE THE RECIPE ---
 # We can run our function as many times as we want with different customers!
 
 print("Customer 1 is checking out:")
